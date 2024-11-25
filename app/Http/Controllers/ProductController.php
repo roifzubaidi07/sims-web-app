@@ -62,13 +62,12 @@ class ProductController extends Controller
             'category_id' => 'required',
             'buyingprice' => 'required',
             'sellingprice' => 'required',
-            'image' => 'required|image|mimes:jpg,png|max:100',
+            'image' => 'image|mimes:jpg,png|max:100',
         ],
         [
             'required' => 'Harap bagian :attribute di isi', 
             'category_id.required' => 'Harap bagian kategori di isi', 
             'unique' => 'Data :attribute sudah terdaftar di sistem!',
-            'image.required' => 'Harap unggah gambar terlebih dahulu',
             'image.mimes' => 'Format file harus gambar (.jpg atau .png)',
             'image.max' => 'Ukuran file tidak boleh melebihi 100KB',
         ]);
