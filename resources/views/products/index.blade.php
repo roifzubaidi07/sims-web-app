@@ -53,7 +53,7 @@
 
     <div class="card mb-4">
         <div class="card-body">
-            <table id="example" class="table">
+            <table class="table">
                 <thead>
                     <tr>
                         <th>No</th>

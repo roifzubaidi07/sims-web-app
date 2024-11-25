@@ -39,14 +39,6 @@
             if(previewImg.src != ''){
                 previewImg.style.display = 'block'; // Show the image
             }
-
-            new DataTable('#example', {
-                layout: {
-                    topStart: {
-                        buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
-                    }
-                }
-            });
     
             uploadBox.addEventListener('click', () => {
                 image.click();
