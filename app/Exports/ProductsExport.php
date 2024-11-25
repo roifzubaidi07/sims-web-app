@@ -7,8 +7,10 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 
 class ProductsExport implements FromCollection
 {
-    public function collection()
+    public function view(): View
     {
-        return Product::all();
+        return view('products.index', [
+            'products' => Products::all()
+        ]);
     }
 }

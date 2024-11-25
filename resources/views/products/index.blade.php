@@ -38,12 +38,14 @@
                         </div>
                         <div>
                         </form>
-                            {{-- <form action="/products/export" method="POST" target="_blank">
+                            <form action="/products/export" method="GET" target="_blank">
                                 @csrf
-                                @method('post') --}}
-                                <a href="{{ route('products.export') }}" class="btn btn-success btn-md">Export Excel</a>
-                                {{-- <button type="submit" class="btn btn-success">Export Excel</button> --}}
-                            {{-- </form> --}}
+                                @method('get')
+                                {{-- <a href="{{ route('products.export') }}" class="btn btn-success btn-md">Export Excel</a> --}}
+                                <input type="hidden" name="filter_name" value="{{ isset($_GET['name']) ? $_GET['name'] : '' }}">
+                                <input type="hidden" name="filter_category" value="{{ isset($_GET['category']) ? $_GET['category'] : '' }}">
+                                <button type="submit" class="btn btn-success">Export Excel</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -108,6 +110,7 @@
 
 @push('scripts')
     <script>
+        
         function filterCategory(){
             var categories = $('#category_filter').val();
             console.log(categories);

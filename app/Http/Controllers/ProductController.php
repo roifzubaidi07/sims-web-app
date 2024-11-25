@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\ProductsExport;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Exports\ProductsExport;
 use Maatwebsite\Excel\Facades\Excel;
+use Rap2hpoutre\FastExcel\FastExcel;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
@@ -153,8 +154,25 @@ class ProductController extends Controller
     }
 
 
-    public function export() 
+    public function export(Request $request) 
     {
-        return Excel::download(new ProductsExport, 'products.xlsx');
+        $products = Product::query();
+
+        //filter by name
+        $products->when($request->filter_name, function ($query) use ($request){
+            $querys = $query->where('name','ilike','%'.$request->filter_name.'%');
+        });
+        
+
+        //filter by category
+        if($request->filter_category != 0){
+            $products->when($request->filter_category, function ($query) use ($request){
+                return $query->where('category_id','=',$request->filter_category);
+            });
+        }
+
+        // dd($products);
+
+        return (new FastExcel(Product::all()))->download('file.xlsx');
     }
 }

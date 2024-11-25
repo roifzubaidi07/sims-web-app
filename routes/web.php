@@ -14,11 +14,11 @@ use App\Http\Controllers\ProfileController;
 
 Route::middleware('auth')->group(function () {
     Route::get('/', [ProductController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+    Route::get('/products/export', [ProductController::class, 'export'])->name('products.export');
     Route::resource('/products', ProductController::class);
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::post('/products/export', [ProductController::class, 'export'])->name('products.export');
 });
 
 require __DIR__.'/auth.php';
